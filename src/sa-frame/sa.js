@@ -158,6 +158,105 @@ var sa = {
 
   };
 
+  sa.ajax1 = function(url, data, success200, cfg){
+    //
+    // 如果是简写模式(省略了data参数)
+    if(typeof data === 'function'){
+      cfg = success200;
+      success200 = data;
+      data = {};
+    }
+
+    // 默认配置
+    var defaultCfg = {
+      msg: '努力加载中...',	// 提示语
+      baseUrl: (url.indexOf('http') === 0 ? '' : sa.cfg.api_url),// 父url，拼接在url前面
+      sleep: 0,	// 休眠n毫秒处理回调函数
+      type: 'post',	// 默认请求类型
+      success200: success200,			// code=200, 代表成功
+      success500: function(res){		// code=500, 代表失败
+        return sa.alert('失败：' + res.msg);
+      },
+      success403: function(res){		// code=403, 代表权限不足
+        return layer.alert("权限不足," + res.msg, {icon: 5});
+      },
+      success401: function(res){		// code=401, 代表未登录
+        // 如果是在首页，则直接跳转到login页面
+        let r = router.currentRoute;
+        if (r.name === null || r.name === 'home' || r.path === '/') {
+          return router.push('/login');
+        }
+
+        // 否则弹窗提示是否跳转
+        return layer.alert("您当前暂未登录，请先登录！", {
+          title: '提示',
+          btn: ['确定'],
+          icon: 5,
+          closeBtn: false,
+        }, function(){
+          layer.closeAll();
+          return sa.$page.openLogin();
+        });
+      },
+      errorfn: function(xhr){		// ajax发生异常时的默认处理函数
+        if(xhr.status == 0){
+          return sa.alert('无法连接到服务器，请检查网络');
+        }
+        return sa.alert("异常：" + JSON.stringify(xhr));
+      },
+      complete: function(xhr, ts) {	// 成功失败都会执行
+
+      }
+    }
+
+    // 将调用者的配置和默认配置合并
+    cfg = sa.extendJson(cfg, defaultCfg);
+
+    // 打印请求地址和参数, 以便调试
+    console.log("请求地址：" + cfg.baseUrl + url);
+    console.log("请求参数：" + JSON.stringify(data));
+    console.log("请求参数：" + sa.toUrlParams(data));
+    console.log("请求方式：" + cfg.type);
+
+    // 开始显示loading图标
+    if(cfg.msg != null){
+      sa.loading(cfg.msg);
+    }
+
+    // 请求头，追加Token
+    let headers = {
+      "Content-Type": "application/json",
+      'satoken': sessionStorage.runAsToken || sessionStorage.satoken || localStorage.satoken  || '',
+    }
+    // 开始请求ajax
+    return axios({
+      url: cfg.baseUrl + url,
+      method: cfg.type,
+      headers: headers,
+      data: data
+    }).
+    then(function (response) { // 成功时执行
+      let res = response.data;
+      console.log('返回数据：', res);
+      setTimeout(function() {
+        sa.hideLoading();
+        // 如果相应的处理函数存在
+        if(cfg['success' + res.code] !== undefined) {
+          return cfg['success' + res.code](res);
+        }
+        sa.alert('未知状态码：' + JSON.stringify(res));
+      }, cfg.sleep);
+    }).
+    catch(function (error) {
+      setTimeout(function() {
+        sa.hideLoading();
+        return cfg.errorfn(error.response && error.response.data);
+      }, cfg.sleep);
+    }).
+    then(cfg.complete);
+
+  };
+
   // 模拟一个ajax
   // 请注意: 本模板中所有ajax请求调用的均为此模拟函数
   sa.ajax2 = function(url, data, success200, cfg){

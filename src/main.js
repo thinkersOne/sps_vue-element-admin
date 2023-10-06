@@ -32,8 +32,7 @@ Vue.prototype.layer = layer;
 import '@/sa-frame/sa.css'
 import sa from '@/sa-frame/sa.js'
 global.sa = sa;
-Vue.prototype.sa = sa
-
+Vue.prototype.sa = sa;
 // 全局表单组件
 import SaItem from '@/sa-frame/com/sa-item.vue'
 import SaTd from '@/sa-frame/com/sa-td.vue'

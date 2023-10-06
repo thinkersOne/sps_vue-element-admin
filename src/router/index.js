@@ -147,7 +147,7 @@ export const asyncRoutes = [
         component: () => import('@/sp-views/sp-admin-login/sp-admin-login-list.vue'),
         meta: { title: '管理员登录日志' }
       }
-    ]
+    ]  
   },
 
   {
@@ -283,6 +283,31 @@ export const asyncRoutes = [
             //     component: () => import('@/sp-views/password/password-add.vue'),
             //     meta: { title: '密码表-新增' }
             // },
+		]
+	},
+  {
+		name: 'chart',
+		path: '/chart',
+		component: Layout,
+        meta: {
+          title: '智能对话',
+          icon: 'el-icon-folder-opened'
+        },
+		children: [
+            {
+                name: 'chart-list',
+                path: 'chart-list',
+                component: () => import('@/sp-views/chart/chart-list.vue'),
+                // meta: { title: '文心一言' }
+                meta: { title: '通道一' }
+            },
+            {
+              name: 'ali-chart-list',
+              path: 'ali-chart-list',
+              component: () => import('@/sp-views/chart/ali-chart-list.vue'),
+              // meta: { title: '通义千问' }
+              meta: { title: '通道二' }
+          },
 		]
 	},
   {

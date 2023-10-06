@@ -14,7 +14,8 @@
             </el-link>
           </div> -->
           <div style="margin-top: 30px;">
-            当前为Vue单页版本：vue2、element-ui、js、vue-cli、vuex、vue-router、axios、xlsx
+            <!-- 当前为Vue单页版本：vue2、element-ui、js、vue-cli、vuex、vue-router、axios、xlsx -->
+            系统涵盖智能对话功能(chartgpt)、账号密码管理功能等，更多功能持续开发中...
           </div>
           <div style="height: 20vh;" />
         </div>

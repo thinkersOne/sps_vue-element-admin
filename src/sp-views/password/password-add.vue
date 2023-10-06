@@ -10,16 +10,16 @@
           <el-input type="password" />
         </div>
           <sa-item name="账号分类" br>
-            <el-select v-model="m.categoryId">
+            <el-select v-model="m.CategoryId">
               <el-option label="请选择" :value="0" disabled />
-              <el-option v-for="category in categoryList" :key="category.id" :label="category.name" :value="category.id" />
+              <el-option v-for="category in categoryList" :key="category.id" :label="category.Name" :value="category.id" />
             </el-select>
           </sa-item>
-          <sa-item type="text" name="标题" v-model="m.title" br></sa-item>
-          <sa-item type="text" name="账号" v-model="m.account" br></sa-item>
-          <sa-item type="text" name="密码" v-model="m.password" br></sa-item>
-          <sa-item type="text" name="地址" v-model="m.url" br></sa-item>
-          <sa-item type="text" name="备注" v-model="m.notes" br></sa-item>
+          <sa-item type="text" name="标题" v-model="m.Title" br></sa-item>
+          <sa-item type="text" name="账号" v-model="m.Account" br></sa-item>
+          <sa-item type="text" name="密码" v-model="m.Password" br></sa-item>
+          <sa-item type="text" name="地址" v-model="m.Url" br></sa-item>
+          <sa-item type="text" name="备注" v-model="m.Notes" br></sa-item>
           <sa-item name="" br class="s-ok">
             <el-button type="primary" icon="el-icon-plus" @click="ok()">保存</el-button>
           </sa-item>
@@ -49,14 +49,14 @@ export default {
   methods: {
     crateModel() {
       return {
-        id: 0,
+        Id: 0,
         userId: 0,
-        categoryId: 0,
-        title: "",
-        account: "",
-        password: "",
-        url: "",
-        notes: "",
+        CategoryId: 0,
+        Title: "",
+        Account: "",
+        Password: "",
+        Url: "",
+        Notes: "",
       }
     },
     // 修改
@@ -64,16 +64,16 @@ export default {
       // 表单校验
       let m = this.m;
       console.log(JSON.stringify(m));
-      if (m.categoryId == null || m.categoryId == 0 || m.categoryId == 'undefined') {
+      if (m.CategoryId == null || m.CategoryId == 0 || m.CategoryId == 'undefined') {
         return sa.alert('请选择分类');
       }
-      sa.checkNull(m.title, '请输入标题');
-      sa.checkNull(m.account, '请输入账号');
+      sa.checkNull(m.Title, '请输入标题');
+      sa.checkNull(m.Account, '请输入账号');
       // sa.checkNull(m.password, '请输入密码');
-      sa.checkNull(m.url, '请输入地址');
+      sa.checkNull(m.Url, '请输入地址');
 
       // 添加
-      sa.ajax('/password/add', m, function(res) {
+      sa.ajax1('/password/add', m, function(res) {
         sa.alert('添加成功, 账号id为：' + res.data, function(){
           this.m = this.crateModel();
           if (this.id != 0) {

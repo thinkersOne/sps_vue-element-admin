@@ -1,5 +1,5 @@
 module.exports = {
-  title: '账号密码管理系统',
+  title: 'APS',
 
   /**
    * @type {boolean} true | false

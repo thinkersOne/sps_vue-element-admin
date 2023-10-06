@@ -13,40 +13,36 @@
       <!-- ------------- 数据列表 ------------- -->
       <el-table class="data-table" ref="data-table" :data="dataList" >
         <sa-td type="selection"></sa-td>
-        <el-table-column label="编号" prop="id" width="70px" />
-        <el-table-column label="密码分类">
-          <template slot-scope="s">
-            <el-input v-if="s.row.is_update" v-model="s.row.categoryName" />
-            <span v-else>{{ s.row.categoryName }}</span>
-          </template>
+        <el-table-column label="编号" prop="Id" width="70px" />
+        <el-table-column label="密码分类" prop="CategoryName" width="70px">
         </el-table-column>
         <el-table-column label="标题">
           <template slot-scope="s">
-            <el-input v-if="s.row.is_update" v-model="s.row.title" />
-            <span v-else>{{ s.row.title }}</span>
+            <el-input v-if="s.row.is_update" v-model="s.row.Title" />
+            <span v-else>{{ s.row.Title }}</span>
           </template>
         </el-table-column>
         <el-table-column label="账号">
           <template slot-scope="s">
-            <el-input v-if="s.row.is_update" v-model="s.row.account" />
-            <span v-else>{{ s.row.account }}</span>
+            <el-input v-if="s.row.is_update" v-model="s.row.Account" />
+            <span v-else>{{ s.row.Account }}</span>
           </template>
         </el-table-column>
         <el-table-column label="密码">
           <template slot-scope="s">
-            <el-input v-if="s.row.is_update" v-model="s.row.password" />
-            <span v-else>{{ s.row.password }}</span>
+            <el-input v-if="s.row.is_update" v-model="s.row.Password" />
+            <span v-else>{{ s.row.Password }}</span>
           </template>
         </el-table-column>
         <el-table-column label="登录地址">
           <template slot-scope="s">
-            <el-input v-if="s.row.is_update" v-model="s.row.url" />
-            <span v-else>{{ s.row.url }}</span>
+            <el-input v-if="s.row.is_update" v-model="s.row.Url" />
+            <span v-else>{{ s.row.Url }}</span>
           </template>
         </el-table-column>
         <el-table-column label="备注">
             <template slot-scope="s">
-              {{ s.row.notes}}
+              {{ s.row.Notes}}
             </template>
         </el-table-column>
         <el-table-column label="操作" fixed="right"  width="240px">
@@ -71,8 +67,8 @@ export default {
   data() {
     return {
       p: {		// 查询参数
-        id: '',
-        title: '',
+        Id: '',
+        Title: '',
         pageNo: 1,
         pageSize: 10,
       },
@@ -149,7 +145,7 @@ export default {
     // 删除
     del: function(data) {
       sa.confirm('是否删除，此操作不可撤销', function(){
-        sa.ajax('/password/delete', { id: data.id }, function(res){
+        sa.ajax('/password/delete', { id: data.Id }, function(res){
           sa.arrayDelete(this.dataList, data);
           sa.ok('删除成功');
           sa.f5TableHeight();		// 刷新表格高度
@@ -160,13 +156,13 @@ export default {
     deleteByIds: function() {
       // 获取选中元素的id列表
       let selection = this.$refs['data-table'].selection;
-      let ids = sa.getArrayField(selection, 'id');
+      let ids = sa.getArrayField(selection, 'Id');
       if (selection.length == 0) {
         return sa.msg('请至少选择一条数据')
       }
       // 提交删除
       sa.confirm('是否批量删除选中数据？此操作不可撤销', function() {
-        sa.ajax('/password/deleteByIds', { ids: ids.join(',') }, function(res) {
+        sa.ajax1('/password/deleteByIds', { ids: ids.join(',') }, function(res) {
           sa.arrayDelete(this.dataList, selection);
           sa.ok('删除成功');
           sa.f5TableHeight();		// 刷新表格高度

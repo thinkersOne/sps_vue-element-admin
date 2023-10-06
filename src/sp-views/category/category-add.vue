@@ -51,7 +51,7 @@ export default {
       sa.checkNull(m.name, '请输入分类名');
 
       // 添加
-      sa.ajax('/category/add', m, function(res) {
+      sa.ajax1('/category/add',{"Name": m.name}, function(res) {
         sa.alert('添加成功, 分类id为：' + res.data, function(){
           this.m = this.crateModel();
           if (this.id != 0) {
@@ -60,6 +60,7 @@ export default {
           }
         }.bind(this));
       }.bind(this));
+
     }
   }
 }

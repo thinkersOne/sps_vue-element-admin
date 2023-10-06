@@ -16,8 +16,8 @@
           <el-table-column label="编号" prop="id"/>
           <el-table-column label="分类名称">
             <template slot-scope="s">
-              <el-input v-if="s.row.is_update" v-model="s.row.name" />
-              <span v-else>{{ s.row.name }}</span>
+              <el-input v-if="s.row.is_update" v-model="s.row.Name" />
+              <span v-else>{{ s.row.Name }}</span>
             </template>
           </el-table-column>
           <el-table-column label="创建人">
@@ -86,7 +86,7 @@ export default {
     // 新增
     add: function() {
       console.log(123);
-      sa.showModel('管理员添加', () => import('./category-add'), { id: -1 });
+      sa.showModel('添加分类', () => import('./category-add'), { id: -1 });
     },
     // 修改名称
     updateName: function(data) {
