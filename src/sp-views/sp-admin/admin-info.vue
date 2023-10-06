@@ -34,7 +34,7 @@ export default {
     if (this.id == 0 || this.id == sa.$sys.getCurrUser().id) {
       sa.ajax('/admin/getByCurr', function(res) {
         this.m = res.data;
-      }.bind(this));
+      }.bind(this), { type: 'get' });
     } else {
       sa.ajax('/admin/getById?id=' + this.id, function(res) {
         this.m = res.data;
