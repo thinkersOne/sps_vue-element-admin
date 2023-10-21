@@ -1,22 +1,20 @@
     <template>
         <div class="chat" :style="ChartStyle">
-        <div class="messages" :style="containerStyle">
-            <div v-for="(message, index) in messages" :key="index">
-            <div class="message-text">
-                <pre v-html="formatMessage(message)"></pre>
+            <div class="messages" :style="containerStyle">
+                <div v-for="(message, index) in messages" :key="index">
+                <div class="message-text">
+                    <pre v-html="formatMessage(message)"></pre>
+                </div>
+                </div>
             </div>
+            <div class="input-container">
+                <input type="textarea" v-model="inputText" placeholder="输入消息" autofocus
+                :autosize="{ minRows: 4, maxRows: 4 }" :style="{ width: '80%', height: '80px' }"
+                @input="checkInputNotEmpty"
+                @keyup.enter.exact="sendMessage"
+                @keyup.ctrl.enter="lineFeed()" />
+                <button class="btn" @click="sendMessage" :disabled="inputText.length === 0">发送</button>
             </div>
-        </div>
-        <!-- 其他内容... -->
-        <div v-show="showCopyToast">{{ copyToastMessage }}</div>
-        <div class="input-container">
-            <input type="textarea" v-model="inputText" placeholder="输入消息" autofocus
-            :autosize="{ minRows: 4, maxRows: 4 }" :style="{ width: '90%', height: '80px' }"
-            @input="checkInputNotEmpty"
-            @keyup.enter.exact="sendMessage"
-            @keyup.ctrl.enter="lineFeed()" />
-            <button class="btn" @click="sendMessage" :disabled="inputText.length === 0">发送</button>
-        </div>
         </div>
     </template>
     
@@ -30,8 +28,6 @@
                 sender: '',
                 aiResponse: '',
                 aiSender: '',
-                showCopyToast: false,
-                copyToastMessage: '',
                 platform: 1
             };
         },
@@ -53,8 +49,8 @@
                     width = '1200px';
                     height = '750px';
                 }else if (userAgent.includes('chrome')){
-                    width = '1500px';
-                    height = '850px';
+                    width = '1200px';
+                    height = '500px';
                 }else{
                     width = '800px';
                     height = '600px';
@@ -82,8 +78,8 @@
                 width = '1100px';
                 height = '600px';
             }else if (userAgent.includes('chrome')){
-                width = '1400px';
-                height = '850px';
+                width = '1200px';
+                height = '500px';
             }else{
                 width = '800px';
                 height = '600px';
@@ -155,20 +151,6 @@
             });
             return sender + " : " + content;
         },
-        copyCode(code) {
-            console.log("copyCode:"+code);
-            navigator.clipboard.writeText(code)
-                .then(() => {
-                this.copyToastMessage = '代码块已复制到剪贴板';
-                this.showCopyToast = true;
-                setTimeout(() => {
-                    this.showCopyToast = false;
-                }, 2000);
-                })
-                .catch((error) => {
-                console.error('复制代码失败:', error);
-                });
-        },
         htmlEncode(text) {
             const element = document.createElement('div');
             element.textContent = text;
@@ -203,15 +185,15 @@
     <style>
     /* 样式部分，根据需要自定义 */
     .chat {
-        max-width: 1600px;
-        max-height: 1000px;
+        max-width: 1200px;
+        max-height: 700px;
         margin: 0 auto;
         padding: 10px;
-        margin-top: 30px;
+        margin-top: 20px;
     }
     .messages {
         overflow-y: scroll;
-        max-height: 700px;
+        max-height: 600px;
         margin-left: 20px;
     }
     .message-text {

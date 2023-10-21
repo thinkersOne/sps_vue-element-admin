@@ -36,7 +36,8 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    }
+    },
+    disableHostCheck: true
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

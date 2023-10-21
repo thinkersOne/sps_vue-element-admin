@@ -351,6 +351,42 @@ export const asyncRoutes = [
           
 		]
 	},
+  {
+		name: 'lottery',
+		path: '/lottery',
+		component: Layout,
+        meta: {
+          title: '彩票管理',
+          icon: 'el-icon-folder-opened'
+        },
+		children: [
+            {
+                name: 'lottery-list',
+                path: 'lottery-list',
+                component: () => import('@/sp-views/lottery/lottery-list.vue'),
+                meta: { title: '双色球' }
+            },
+            {
+              name: 'lotteryCalculatePer-list',
+              path: 'lotteryCalculatePer-list',
+              component: () => import('@/sp-views/lottery-calculate-per/lottery-calculate-per-list.vue'),
+              meta: { title: '双色球分析' }
+            },
+            {
+              name: 'lotteryCalculateCount-list',
+              path: 'lotteryCalculateCount-list',
+              component: () => import('@/sp-views/lottery-calculate-count/lottery-calculate-count-list.vue'),
+              meta: { title: '双色球统计' }
+            },
+            {
+              name: 'lotteryCalculateNine-list',
+              path: 'lotteryCalculateNine-list',
+              component: () => import('@/sp-views/lottery-calculate-nine/lottery-calculate-nine-list.vue'),
+              meta: { title: '九转连环图统计表-列表' }
+          },
+		]
+	},
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
@@ -361,7 +397,17 @@ const createRouter = () => new Router({
   routes: constantRoutes
 })
 
-const router = createRouter()
+const router = createRouter();
+router.onError((error) => {
+  const pattern = /Loading chunk (\d)+ failed/g;
+  const isChunkLoadFailed = error.message.match(pattern);
+  if(isChunkLoadFailed){
+    // 用路由的replace方法，并没有相当于F5刷新页面，失败的js文件并没有从新请求，会导致一直尝试replace页面导致死循环，而用 location.reload 方法，相当于触发F5刷新页面，虽然用户体验上来说会有刷新加载察觉，但不会导致页面卡死及死循环，从而曲线救国解决该问题
+      location.reload();
+      // const targetPath = $router.history.pending.fullPath;
+      // $router.replace(targetPath);
+  }
+});
 sa.router = router;
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
