@@ -17,25 +17,25 @@
       <sa-item type="fast-btn" show="export,reset" />
       <!-- ------------- 数据列表 ------------- -->
       <el-table ref="data-table" class="data-table" :data="dataList">
-                <el-table-column v-if="!p.calType || p.calType === 1 || p.calType === 2 || p.calType === 3" label="年份" prop="year" >
+                <el-table-column fixed="left" v-if="!p.calType || p.calType === 1 || p.calType === 2 || p.calType === 3" label="年份" prop="year" >
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.year" />
                       <span v-else>{{ s.row.year}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column v-if="!p.calType || p.calType === 2" label="月份" prop="month" >
+                <el-table-column fixed="left" v-if="!p.calType || p.calType === 2" label="月份" prop="month" >
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.month" />
                       <span v-else>{{ s.row.month}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column v-if="!p.calType || p.calType === 3" label="周" prop="week" >
+                <el-table-column fixed="left" v-if="!p.calType || p.calType === 3" label="周" prop="week" >
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.week" />
                       <span v-else>{{ s.row.week}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column v-if="!p.calType || p.calType === 4" label="期号区间" prop="codes" >
+                <el-table-column fixed="left" v-if="!p.calType || p.calType === 4" label="期号区间" prop="codes" width="120px">
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.codes" />
                       <span v-else>{{ s.row.codes}}</span>
@@ -461,54 +461,6 @@
                       <span v-else>{{ s.row.redRange141}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="蓝小" prop="blueSmall" >
-                    <template slot-scope="s">
-                      <el-input v-if="s.row.is_update" v-model="s.row.blueSmall" />
-                      <span v-else>{{ s.row.blueSmall}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="蓝大" prop="blueBig" >
-                    <template slot-scope="s">
-                      <el-input v-if="s.row.is_update" v-model="s.row.blueBig" />
-                      <span v-else>{{ s.row.blueBig}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="蓝区1" prop="blueAreaOne" >
-                    <template slot-scope="s">
-                      <el-input v-if="s.row.is_update" v-model="s.row.blueAreaOne" />
-                      <span v-else>{{ s.row.blueAreaOne}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="蓝区2" prop="blueAreaTwo" >
-                    <template slot-scope="s">
-                      <el-input v-if="s.row.is_update" v-model="s.row.blueAreaTwo" />
-                      <span v-else>{{ s.row.blueAreaTwo}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="蓝区3" prop="blueAreaThree" >
-                    <template slot-scope="s">
-                      <el-input v-if="s.row.is_update" v-model="s.row.blueAreaThree" />
-                      <span v-else>{{ s.row.blueAreaThree}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="蓝区4" prop="blueAreaFour" >
-                    <template slot-scope="s">
-                      <el-input v-if="s.row.is_update" v-model="s.row.blueAreaFour" />
-                      <span v-else>{{ s.row.blueAreaFour}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="蓝奇" prop="blueParity" >
-                    <template slot-scope="s">
-                      <el-input v-if="s.row.is_update" v-model="s.row.blueParity" />
-                      <span v-else>{{ s.row.blueParity}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="蓝偶" prop="blueRatio" >
-                    <template slot-scope="s">
-                      <el-input v-if="s.row.is_update" v-model="s.row.blueRatio" />
-                      <span v-else>{{ s.row.blueRatio}}</span>
-                    </template>
-                </el-table-column>
                 <el-table-column label="红21_60" prop="red2160" >
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.red2160" />
@@ -597,6 +549,102 @@
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.red145183" />
                       <span v-else>{{ s.row.red145183}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="连号个数0" prop="consecutiveNumbersCount0" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.consecutiveNumbersCount0" />
+                      <span v-else>{{ s.row.consecutiveNumbersCount0}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="连号个数1" prop="consecutiveNumbersCount1" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.consecutiveNumbersCount1" />
+                      <span v-else>{{ s.row.consecutiveNumbersCount1}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="连号个数2" prop="consecutiveNumbersCount2" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.consecutiveNumbersCount2" />
+                      <span v-else>{{ s.row.consecutiveNumbersCount2}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="连号数1" prop="maxConsecutiveNumbers1" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.maxConsecutiveNumbers1" />
+                      <span v-else>{{ s.row.maxConsecutiveNumbers1}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="连号数2" prop="maxConsecutiveNumbers2" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.maxConsecutiveNumbers2" />
+                      <span v-else>{{ s.row.maxConsecutiveNumbers2}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="连号数3" prop="maxConsecutiveNumbers3" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.maxConsecutiveNumbers3" />
+                      <span v-else>{{ s.row.maxConsecutiveNumbers3}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="连号数4" prop="maxConsecutiveNumbers4" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.maxConsecutiveNumbers4" />
+                      <span v-else>{{ s.row.maxConsecutiveNumbers4}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="连号数5" prop="maxConsecutiveNumbers5" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.maxConsecutiveNumbers5" />
+                      <span v-else>{{ s.row.maxConsecutiveNumbers5}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="蓝小" prop="blueSmall" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.blueSmall" />
+                      <span v-else>{{ s.row.blueSmall}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="蓝大" prop="blueBig" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.blueBig" />
+                      <span v-else>{{ s.row.blueBig}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="蓝区1" prop="blueAreaOne" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.blueAreaOne" />
+                      <span v-else>{{ s.row.blueAreaOne}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="蓝区2" prop="blueAreaTwo" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.blueAreaTwo" />
+                      <span v-else>{{ s.row.blueAreaTwo}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="蓝区3" prop="blueAreaThree" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.blueAreaThree" />
+                      <span v-else>{{ s.row.blueAreaThree}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="蓝区4" prop="blueAreaFour" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.blueAreaFour" />
+                      <span v-else>{{ s.row.blueAreaFour}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="蓝奇" prop="blueParity" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.blueParity" />
+                      <span v-else>{{ s.row.blueParity}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="蓝偶" prop="blueRatio" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.blueRatio" />
+                      <span v-else>{{ s.row.blueRatio}}</span>
                     </template>
                 </el-table-column>
      </el-table>

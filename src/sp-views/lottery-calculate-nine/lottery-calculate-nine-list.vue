@@ -35,19 +35,19 @@
       <sa-item type="fast-btn" show="export,reset" />
       <!-- ------------- 数据列表 ------------- -->
       <el-table ref="data-table" class="data-table" :data="dataList">
-                <el-table-column v-if="!p.calType || p.calType === 1 || p.calType === 2" label="年份" prop="year" >
+                <el-table-column fixed="left" v-if="!p.calType || p.calType === 1 || p.calType === 2" label="年份" prop="year" >
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.year" />
                       <span v-else>{{ s.row.year}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column v-if="!p.calType || p.calType === 2" label="月份" prop="month" >
+                <el-table-column fixed="left"  v-if="!p.calType || p.calType === 2" label="月份" prop="month" >
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.month" />
                       <span v-else>{{ s.row.month}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column v-if="!p.calType || p.calType === 4"  label="区号区间" prop="codes" >
+                <el-table-column fixed="left" v-if="!p.calType || p.calType === 4"  label="区号区间" prop="codes" width="120px">
                     <template slot-scope="s">
                       <el-input v-if="s.row.is_update" v-model="s.row.codes" />
                       <span v-else>{{ s.row.codes}}</span>

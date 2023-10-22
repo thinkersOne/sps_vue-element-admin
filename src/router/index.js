@@ -379,11 +379,17 @@ export const asyncRoutes = [
               meta: { title: '双色球统计' }
             },
             {
+              name: 'lotteryCalculateCount-list-avg',
+              path: 'lotteryCalculateCount-list-avg',
+              component: () => import('@/sp-views/lottery-calculate-count/lottery-calculate-count-list-avg.vue'),
+              meta: { title: '双色球平均值分析' }
+            },
+            {
               name: 'lotteryCalculateNine-list',
               path: 'lotteryCalculateNine-list',
               component: () => import('@/sp-views/lottery-calculate-nine/lottery-calculate-nine-list.vue'),
               meta: { title: '九转连环图统计表-列表' }
-          },
+            },
 		]
 	},
 
