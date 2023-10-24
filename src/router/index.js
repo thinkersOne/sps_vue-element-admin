@@ -390,6 +390,15 @@ export const asyncRoutes = [
               component: () => import('@/sp-views/lottery-calculate-nine/lottery-calculate-nine-list.vue'),
               meta: { title: '九转连环图统计表-列表' }
             },
+            {
+              name: 'lotteryForecast-list',
+              path: 'lotteryForecast-list',
+              component: () => import('@/sp-views/lottery-forecast/lottery-forecast-list.vue'),
+              meta: {
+                title: '号码预测',
+                icon: 'el-icon-folder-opened'
+              }
+            },
 		]
 	},
 
