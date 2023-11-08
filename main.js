@@ -13,7 +13,7 @@ function createWindow () {
     }
   })
 
-  mainWindow.loadFile('./dist_electron/index.html') 
+  mainWindow.loadFile('./dist/index.html') 
 }
 
 app.whenReady().then(() => {
