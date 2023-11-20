@@ -7,52 +7,85 @@
         <sa-item v-model="p.name" type="text" name="名称" />
         <el-button type="primary" icon="el-icon-search" @click="p.pageNo = 1; f5()">查询</el-button>
         <br>
+        <sa-item name="综合排序" class="s-radio-text">
+          <el-radio-group v-model="p.sortType">
+            <el-radio label="id">最近添加</el-radio>
+            <el-radio label="loginTime">最近登录</el-radio>
+            <el-radio label="loginCount">登录次数</el-radio>
+          </el-radio-group>
+        </sa-item>
       </el-form>
       <!-- ------------- 快捷按钮 ------------- -->
       <sa-item type="fast-btn" show="add,delete,export,reset" />
       <!-- ------------- 数据列表 ------------- -->
       <el-table ref="data-table" class="data-table" :data="dataList">
         <sa-td type="selection"></sa-td>
-        <el-table-column label="商品编号" prop="id"/>
-        <el-table-column label="商品名称">
-          <template slot-scope="s">
-            <el-input v-if="s.row.is_update" v-model="s.row.name" />
-            <span v-else>{{ s.row.name }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="商品类别">
-          <template slot-scope="s">
-              {{ s.row.typeName}}
-          </template>
-        </el-table-column>
-        <el-table-column label="创建人">
-          <template slot-scope="s">
-              {{ s.row.createBy}}
-          </template>
-        </el-table-column>
-        <el-table-column label="创建日期">
-          <template slot-scope="s">
-            {{ sa.forDate(s.row.createTime, 2) }}
-          </template>
-        </el-table-column>
-        <el-table-column label="更新人">
-          <template slot-scope="s">
-            {{ s.row.updateBy}}
-          </template>
-        </el-table-column>
-        <el-table-column label="更新日期">
-          <template slot-scope="s">
-            {{ sa.forDate(s.row.updateTime, 2) }}
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" fixed="right"  width="220px">
-          <template slot-scope="s">
-            <el-button type="text" @click="update(s.row)">
-              <span :style="s.row.is_update ? 'color: red;' : ''">修改</span>
-            </el-button>
-            <el-button class="c-btn" type="danger" icon="el-icon-delete" @click="del(s.row)">删除</el-button>
-          </template>
-        </el-table-column>
+                        <el-table-column label="主键id" prop="id" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.id" />
+                      <span v-else>{{ s.row.id}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="商品名称" prop="name" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.name" />
+                      <span v-else>{{ s.row.name}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="商品类别1:包天2:包月3:三个月4:包季度5:包年6:永久" prop="type" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.type" />
+                      <span v-else>{{ s.row.type}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="单价" prop="unitPrice" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.unitPrice" />
+                      <span v-else>{{ s.row.unitPrice}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="商品图片" prop="imgUrl" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.imgUrl" />
+                      <span v-else>{{ s.row.imgUrl}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="1：上架2:下架" prop="status" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.status" />
+                      <span v-else>{{ s.row.status}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="创建时间" prop="createTime" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.createTime" />
+                      <span v-else>{{ s.row.createTime}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="创建人" prop="createBy" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.createBy" />
+                      <span v-else>{{ s.row.createBy}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="更新时间" prop="updateTime" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.updateTime" />
+                      <span v-else>{{ s.row.updateTime}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="更新人" prop="updateBy" >
+                    <template slot-scope="s">
+                      <el-input v-if="s.row.is_update" v-model="s.row.updateBy" />
+                      <span v-else>{{ s.row.updateBy}}</span>
+                    </template>
+                </el-table-column>
+            <el-table-column label="操作" fixed="right"  width="240px">
+                <template slot-scope="s">
+                    <el-button class="c-btn" type="primary" icon="el-icon-edit" @click="update(s.row)">修改</el-button>
+                    <el-button class="c-btn" type="danger" icon="el-icon-delete" @click="del(s.row)">删除</el-button>
+                </template>
+            </el-table-column>
      </el-table>
       <!-- 分页 -->
       <sa-item type="page" :curr.sync="p.pageNo" :size.sync="p.pageSize" :total="dataCount" @change="f5()" />
@@ -87,7 +120,6 @@ export default {
     f5: function() {
       sa.ajax('/spProduct/getList', this.p, function(res) {
         this.dataList = sa.listAU(res.data);
-        this.dataCount = res.dataCount;
         sa.f5TableHeight();		// 刷新表格高度
       }.bind(this));
     },
@@ -110,19 +142,18 @@ export default {
     },
     // 修改名称
     update: function(data) {
-      console.log(JSON.stringify(data));
-      if (data.is_update == false || data.is_update == 'undefined') {
-        data.is_update = true;
-      } else {
-        sa.confirm('是否修改名称？', function() {
-          let data2 = sa.copyJSON(data)
-          sa.ajax('/spProduct/update', data2, function(res) {
-            sa.ok('修改成功');
-            data.is_update = false;
-          })
-        })
-      }
-    },
+          console.log(JSON.stringify(data));
+          if (data.is_update == false || data.is_update == 'undefined') {
+            data.is_update = true;
+          } else {
+            sa.confirm('是否修改数据？', function() {
+              sa.ajax('/spProduct/update', data, function(res) {
+                sa.ok('修改成功');
+                data.is_update = false;
+              })
+            })
+          }
+        },
     // 修改用户的状态
     updateStatus: function(data) {
       if (data.id == sa.$sys.getCurrUser().id) {

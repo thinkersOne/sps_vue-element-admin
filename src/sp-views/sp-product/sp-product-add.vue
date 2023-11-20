@@ -9,13 +9,10 @@
           <el-input />
           <el-input type="password" />
         </div>
-          <sa-item type="text" name="商品名称" v-model="m.name" br></sa-item>
-          <sa-item name="商品类别" br>
-            <el-select v-model="m.type">
-              <el-option label="请选择" :value="0" disabled />
-              <el-option v-for="typeObj in typeList" :key="typeObj.type" :label="typeObj.name" :value="typeObj.type" />
-            </el-select>
-          </sa-item>
+        						<sa-item type="text" name="商品名称" v-model="m.name" br></sa-item>
+        						<sa-item type="text" name="商品类别1:包天2:包月3:三个月4:包季度5:包年6:永久" v-model="m.type" br></sa-item>
+        						<sa-item type="text" name="单价" v-model="m.unitPrice" br></sa-item>
+        						<sa-item type="text" name="商品图片" v-model="m.imgUrl" br></sa-item>
       </el-form>
     </div>
   </div>
@@ -30,15 +27,7 @@ export default {
     return {
       id: (this.param && this.param.id) || 0, 	// 超级对象
       m: this.crateModel(),
-      roleList: [],
-      typeList: [
-        {type: 1, name: "包天"},
-        {type: 2, name: "包月"},
-        {type: 3, name: "3个月"},
-        {type: 4, name: "包季度"},
-        {type: 5, name: "包年"},
-        {type: 6, name: "永久"}
-      ]
+      roleList: []
     }
   },
   created: function() {
@@ -50,9 +39,12 @@ export default {
   methods: {
     crateModel() {
       return {
-            "id": 0,
+            "id": "",
             "name": "",
             "type": "",
+            "unitPrice": "",
+            "imgUrl": "",
+            "status": "",
             "createTime": "",
             "createBy": "",
             "updateTime": "",
