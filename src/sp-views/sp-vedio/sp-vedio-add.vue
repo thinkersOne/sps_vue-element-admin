@@ -82,7 +82,7 @@ export default {
       let m = this.formData;
       console.log(m);
       // 添加
-      sa.ajax('/spVedio/add', m, function(res) {
+      sa.ajax1('/spVedio/add', m, function(res) {
         sa.alert('添加成功, 账号id为：' + res.data, function(){
           this.m = this.crateModel();
           if (this.id != 0) {

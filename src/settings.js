@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'APS',
+  title: 'APS后台管理系统',
 
   /**
    * @type {boolean} true | false

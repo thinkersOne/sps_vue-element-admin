@@ -39,8 +39,8 @@
             </el-form>
           </div>
         <!-- 底部 版权 -->
-        <div style="position: absolute; bottom: 40px; width: 100%; text-align: center; color: #666;">
-          Copyright ©2022 {{$root.title}} | xx 市 xx 网络科技有限公司 - 提供技术支持
+        <div style="position: absolute; bottom: 40px; width: 100%; text-align: center; color: blue;">
+          {{$root.title}} | <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备2024069122号</a>
         </div>
         </div>
       </div>

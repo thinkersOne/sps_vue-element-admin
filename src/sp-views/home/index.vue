@@ -21,6 +21,9 @@
         </div>
       </div>
     </div>
+    <div style="width: 100%;align-items: center;text-align: center;font-size: 20px;color: blue">
+      <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备2024069122号</a>
+    </div>
   </div>
 </template>
 
